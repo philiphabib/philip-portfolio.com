@@ -1,0 +1,60 @@
+name: Deploy Portfolio to S3 + CloudFront
+
+on:
+  push:
+    branches:
+      - main  # change if you use a different branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      # -----------------------------
+      # Checkout repo
+      # -----------------------------
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # -----------------------------
+      # Configure AWS credentials
+      # -----------------------------
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # change if your S3/CloudFront are in another region
+
+      # -----------------------------
+      # Deploy to S3
+      # -----------------------------
+      - name: Sync S3 Bucket
+        run: |
+          BUCKET_NAME="philip-portfolio.com"
+          SITE_DIR="./"
+          aws s3 sync "$SITE_DIR" "s3://$BUCKET_NAME" \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*"
+
+      # -----------------------------
+      # Ensure CSS Content-Type
+      # -----------------------------
+      - name: Fix CSS Content-Type
+        run: |
+          BUCKET_NAME="philip-portfolio.com"
+          aws s3 cp "s3://$BUCKET_NAME/styles.css" \
+                    "s3://$BUCKET_NAME/styles.css" \
+                    --content-type "text/css" \
+                    --metadata-directive REPLACE
+
+      # -----------------------------
+      # Invalidate CloudFront
+      # -----------------------------
+      - name: CloudFront Invalidation
+        run: |
+          DISTRIBUTION_ID="E123456789ABCDE"  # replace with your CloudFront ID
+          aws cloudfront create-invalidation \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/styles.css" "/index.html"
