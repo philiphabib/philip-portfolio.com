@@ -1,0 +1,175 @@
+/* ---------- Base ---------- */
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ---------- Navigation ---------- */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: #111;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #00c6ff;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background: linear-gradient(to right, #6b8a96, #8fb2bd, #a9c7d3);
+  color: #0f2027;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  max-width: 800px;
+  margin: 0 auto 10px;
+}
+
+.hero-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.primary {
+  background: #0f2027;
+  color: #fff;
+}
+
+.secondary {
+  border: 2px solid #0f2027;
+  color: #0f2027;
+}
+
+.primary:hover,
+.secondary:hover {
+  opacity: 0.85;
+}
+
+.deploy-note {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* ---------- Sections ---------- */
+section {
+  padding: 10px 24px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  margin-bottom: 24px;
+  font-size: 1.9rem;
+}
+
+h2::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: #2c5364;
+  display: block;
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+/* ---------- Grid ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* ---------- Cards & Projects ---------- */
+.card,
+.project {
+  background: #fff;
+  padding: 15px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 20px rgba(0,0,0,0.15);
+}
+
+.project h3 {
+  margin-top: 0;
+}
+
+.project a,
+.card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #2c5364;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.project a:hover,
+.card a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #111;
+  color: #ccc;
+  font-size: 0.9rem;
+}
