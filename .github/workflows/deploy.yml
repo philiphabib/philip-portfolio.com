@@ -54,7 +54,7 @@ jobs:
       # -----------------------------
       - name: CloudFront Invalidation
         run: |
-          DISTRIBUTION_ID="E123456789ABCDE"  # replace with your CloudFront ID
+          DISTRIBUTION_ID="E2BPSE1G5HMB3A"  # replace with your CloudFront ID
           aws cloudfront create-invalidation \
             --distribution-id "$DISTRIBUTION_ID" \
             --paths "/styles.css" "/index.html"
