@@ -1,175 +1,163 @@
-/* ---------- Base ---------- */
-body {
-  margin: 0;
-  font-family: "Inter", "Segoe UI", Arial, sans-serif;
-  background: #f5f5f5;
-  color: #333;
-  line-height: 1.6;
+/* ================= BADGE ================= */
+.badge {
+  display: inline-block;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
-/* ---------- Navigation ---------- */
+.badge:hover {
+  filter: brightness(1.2);
+}
+
+/* Badge Colors by Project Type */
+.badge.cnd       { background-color: #ff6b6b; } /* CloudFront / CDN */
+.badge.api       { background-color: #4dabf7; } /* API / Serverless */
+.badge.k8s       { background-color: #51cf66; } /* Kubernetes / Microservices */
+.badge.ci-cd     { background-color: #f4c724; color: #000; } /* CI/CD Pipeline (improved contrast) */
+.badge.monitor   { background-color: #845ef7; } /* Monitoring / Grafana */
+
+/* ================= GLOBAL STYLES ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f7fa;
+}
+
+a {
+  text-decoration: none;
+  color: #1f6feb;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3 { color: #111; }
+
+section { padding: 20px 20px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+/* ================= NAVIGATION ================= */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
-  background: #111;
-  color: #fff;
+  padding: 20px 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
 }
 
-.logo {
-  font-weight: 700;
-  font-size: 1.1rem;
-}
+nav .logo { font-size: 1.5rem; font-weight: bold; }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 24px;
-  margin: 0;
-  padding: 0;
-}
+nav ul { display: flex; gap: 20px; list-style: none; }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-}
+nav ul li a { font-weight: 500; }
 
-nav a:hover {
-  color: #00c6ff;
-}
-
-/* ---------- Hero ---------- */
+/* ================= HERO ================= */
 .hero {
-  background: linear-gradient(to right, #6b8a96, #8fb2bd, #a9c7d3);
-  color: #0f2027;
-  padding: 10px 20px;
   text-align: center;
+  padding: 40px 20px 20px 20px;
+  background: linear-gradient(to bottom, #1f6feb, #0a2540);
+  color: #fff;
 }
 
-.hero h1 {
-  font-size: 2.6rem;
-  margin-bottom: 10px;
-}
+.hero h1 { font-size: 3rem; margin-bottom: 20px; }
 
-.subtitle {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
+.hero .subtitle { font-size: 1.2rem; margin-bottom: 15px; font-weight: 500; }
 
-.hero-desc {
-  font-size: 1rem;
-  max-width: 800px;
-  margin: 0 auto 10px;
-}
+.hero .hero-desc { font-size: 1rem; max-width: 600px; margin: 0 auto 25px auto; }
 
 .hero-links {
+  margin-bottom: 15px;
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .btn {
-  padding: 12px 22px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.primary {
-  background: #0f2027;
-  color: #fff;
-}
-
-.secondary {
-  border: 2px solid #0f2027;
-  color: #0f2027;
-}
-
-.primary:hover,
-.secondary:hover {
-  opacity: 0.85;
-}
-
-.deploy-note {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
-/* ---------- Sections ---------- */
-section {
-  padding: 10px 24px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-h2 {
-  margin-bottom: 24px;
-  font-size: 1.9rem;
-}
-
-h2::after {
-  content: "";
-  width: 60px;
-  height: 4px;
-  background: #2c5364;
-  display: block;
-  margin-top: 8px;
-  border-radius: 2px;
-}
-
-/* ---------- Grid ---------- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-}
-
-/* ---------- Cards & Projects ---------- */
-.card,
-.project {
-  background: #fff;
-  padding: 15px;
-  border-radius: 14px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover,
-.project:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 20px rgba(0,0,0,0.15);
-}
-
-.project h3 {
-  margin-top: 0;
-}
-
-.project a,
-.card a {
   display: inline-block;
-  margin-top: 10px;
-  color: #2c5364;
-  font-weight: 600;
-  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.project a:hover,
-.card a:hover {
-  text-decoration: underline;
+.btn.primary { background-color: #ff6b6b; color: #fff; }
+.btn.primary:hover { background-color: #ff4c4c; }
+
+.btn.secondary { background-color: #1f6feb; color: #fff; }
+.btn.secondary:hover { background-color: #0047b3; }
+
+.deploy-note { font-size: 0.9rem; font-style: italic; margin-top: 10px; }
+
+/* ================= PROJECT CARD ================= */
+.project {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
 }
 
-/* ---------- Footer ---------- */
-footer {
-  text-align: center;
-  padding: 15px;
-  background: #111;
-  color: #ccc;
-  font-size: 0.9rem;
+#projects .grid .project:nth-child(1) { animation-delay: 0.1s; }
+#projects .grid .project:nth-child(2) { animation-delay: 0.3s; }
+#projects .grid .project:nth-child(3) { animation-delay: 0.5s; }
+#projects .grid .project:nth-child(4) { animation-delay: 0.7s; }
+#projects .grid .project:nth-child(5) { animation-delay: 0.9s; }
+
+.project:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+
+.project h3 { margin-top: 0; margin-bottom: 0.5rem; font-size: 1.1rem; color: #222; }
+
+.project p { font-size: 0.9rem; line-height: 1.5; color: #555; }
+
+.project a { text-decoration: none; color: #1c7ed6; font-weight: bold; margin-right: 0.5rem; margin-bottom: 0.3rem; display: inline-block; }
+.project a:hover { text-decoration: underline; }
+
+/* ================= CERTIFICATIONS & SKILLS ================= */
+#certifications .grid, #skills .grid { gap: 20px; }
+#skills .card { text-align: center; }
+
+/* ================= CONTACT ================= */
+#contact { text-align: center; }
+#contact a { margin: 0 10px; }
+
+/* ================= FOOTER ================= */
+footer { text-align: center; padding: 30px 20px; background-color: #111; color: #fff; font-size: 0.9rem; }
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  nav { flex-direction: column; gap: 10px; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero .subtitle { font-size: 1rem; }
+}
+@media (max-width: 480px) {
+  .hero-links { flex-direction: column; }
 }
