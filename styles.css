@@ -123,6 +123,13 @@ nav ul li a { font-weight: 500; }
   animation: fadeInUp 0.8s ease forwards;
 }
 
+.highlight {
+  background-color: yellow;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+
 #projects .grid .project:nth-child(1) { animation-delay: 0.1s; }
 #projects .grid .project:nth-child(2) { animation-delay: 0.3s; }
 #projects .grid .project:nth-child(3) { animation-delay: 0.5s; }
