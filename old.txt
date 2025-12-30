@@ -1,0 +1,16 @@
+    <div class="project">
+      <h3>
+        Kubernetes Microservices Platform
+        <span class="badge k8s">K8s</span>
+      </h3>
+      <p>
+        Built and operated a Kubernetes-based microservices platform using Helm on AWS EC2 (K3s),
+        exposed via Ingress with automated deployments.
+      </p>
+      <p><strong>Tech:</strong> Kubernetes, Helm, Docker, AWS EC2</p>
+      <a href="http://frontend.philip-portfolio.com:30080/" target="_blank">Frontend</a>
+      &nbsp;|&nbsp;
+      <a href="http://api.philip-portfolio.com:30080/" target="_blank">API Demo</a>
+      <h5 class="highlight" color="yellow"><strong>Monday to Friday: (<strong>10:00–17:00 Cairo Time</strong>)</h5>
+
+    </div>
