@@ -6,15 +6,232 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Senior Packet Core & DevOps Engineer (CKA) with 10+ years of telecom experience. Specialized in AWS, Kubernetes, CI/CD, Terraform, and cloud-native platforms." />
   <meta name="keywords" content="Packet Core Engineer, DevOps Engineer, Kubernetes, CKA, AWS, CI/CD, Terraform, Helm, Cloud-Native, 5G Core" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ================= GLOBAL STYLES & VARIABLES ================= */
+    :root {
+      --primary-color: #0056b3; /* A slightly deeper blue */
+      --secondary-color: #0a2540;
+      --accent-color: #ff6b6b;
+      --text-color: #343a40;
+      --heading-color: #1d2d35;
+      --bg-color: #f8f9fa;
+      --white: #ffffff;
+      --border-color: #dee2e6;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: var(--secondary-color);
+    }
+
+    h1, h2, h3 {
+      color: var(--heading-color);
+      font-weight: 600;
+    }
+    
+    h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+    h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 1.5rem; text-align: center; }
+    h3 { font-size: 1.2rem; }
+
+    section {
+      padding: 60px 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    /* ================= NAVIGATION ================= */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: var(--white);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+        box-shadow: var(--shadow);
+    }
+
+    nav .logo { font-size: 1.2rem; font-weight: 700; color: var(--heading-color); }
+    nav ul { display: flex; gap: 30px; list-style: none; }
+    nav ul li a { font-weight: 500; font-size: 0.95rem; }
+
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+    .menu-toggle .bar {
+        width: 25px;
+        height: 3px;
+        background-color: var(--heading-color);
+        border-radius: 3px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+
+    /* ================= HERO ================= */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+    }
+
+    .hero .subtitle { font-size: 1.25rem; margin-bottom: 20px; font-weight: 400; opacity: 0.9; }
+    .hero .hero-desc { font-size: 1.1rem; max-width: 650px; margin: 0 auto 30px auto; opacity: 0.95; }
+
+    .hero-links .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      background-color: var(--accent-color);
+      color: var(--white);
+      font-size: 1rem;
+    }
+    .hero-links .btn a { color: var(--white); text-decoration: none; }
+    .hero-links .btn:hover { transform: translateY(-3px); background-color: #e65c5c; }
+    .hero-links .btn a:hover { text-decoration: none; }
+
+
+    /* ================= SECTIONS & CARDS ================= */
+    .card, .project {
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+    .card:hover, .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    #certifications .card p:first-of-type { font-weight: 500; margin-bottom: 0.5rem; }
+    #certifications .card a { font-weight: 500; }
+    
+    #skills .card { text-align: center; }
+    #skills .card strong { display: block; margin-bottom: 0.5rem; color: var(--primary-color); font-size: 1.1rem; }
+
+    /* ================= PROJECTS ================= */
+    .project h3 { margin-bottom: 0.75rem; }
+    .project p { margin-bottom: 1rem; color: #555; }
+    .project a { font-weight: 600; margin-right: 0.75rem; }
+
+    .badge {
+      display: inline-block;
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-left: 8px;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+    .badge.cnd   { background-color: #ff6b6b; }
+    .badge.api   { background-color: #4dabf7; }
+    .badge.ci-cd { background-color: #f4c724; color: var(--heading-color); }
+
+    /* ================= CONTACT & FOOTER ================= */
+    #contact { text-align: center; }
+    #contact p { margin-bottom: 1rem; }
+    #contact a { font-weight: 500; margin: 0 10px; }
+    footer { text-align: center; padding: 30px 20px; background-color: var(--secondary-color); color: var(--white); font-size: 0.9rem; opacity: 0.8;}
+
+    /* ================= RESPONSIVE DESIGN ================= */
+    @media (max-width: 768px) {
+      nav { padding: 15px 20px; }
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 66px; /* Height of nav */
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        flex-direction: column;
+        text-align: center;
+        box-shadow: var(--shadow);
+        border-top: 1px solid var(--border-color);
+      }
+      nav ul.active { display: flex; }
+      nav ul li { padding: 15px 0; width: 100%; }
+      nav ul li:hover { background-color: var(--bg-color); }
+      .menu-toggle { display: flex; }
+      .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+      .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+      section { padding: 40px 15px; }
+    }
+  </style>
 </head>
 
 <body>
 
 <!-- ================= NAV ================= -->
-<nav aria-label="Main Navigation">
+<nav id="navbar">
   <div class="logo">Philip Abdelmalak</div>
-  <ul>
+  <div class="menu-toggle" id="menu-toggle">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <ul id="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#certifications">Certifications</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -25,151 +242,154 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero">
-  <h1>Packet Core & DevOps Engineer</h1>
-
-  <p class="subtitle">
-    CKA Certified • AWS • Kubernetes • CI/CD • Terraform • Cloud-Native Platforms
-  </p>
-
-  <p class="hero-desc">
-    Building, automating, and operating scalable cloud-native and telecom platforms
-    with real-world production experience.
-  </p>
-
-  <div class="hero-links">
-    <p class="btn primary" target="_blank" rel="noopener">5G Core Testbed Ready - But Website UI is under final development<br />
-    <a href="https://dashboard.philip-portfolio.com/" target="_blank" rel="noopener">dashboard.philip-portfolio.com</a>
-    </p>
+  <div class="container">
+    <h1>Packet Core & DevOps Engineer</h1>
+    <p class="subtitle">CKA Certified • AWS • Kubernetes • CI/CD • Terraform • Cloud-Native Platforms</p>
+    <p class="hero-desc">Building, automating, and operating scalable cloud-native and telecom platforms with real-world production experience.</p>
+    <div class="hero-links">
+      <p class="btn primary"><a href="https://dashboard.philip-portfolio.com/" target="_blank" rel="noopener">View 5G Testbed_Core Dashboard ( Webui is under development )</a></p>
+    </div>
   </div>
-
 </header>
 
-<!-- ================= ABOUT ================= -->
-<section id="about">
-  <h2>About Me</h2>
-  
-<p>I am a <strong>Senior Packet Core & DevOps Engineer</strong> with <strong>10+ years of experience</strong> in telecom and 7+ years working with AWS, Kubernetes, and cloud-native Packet Core platforms.I specialize in CI/CD, Infrastructure as Code (Terraform, Helm), and scalable Linux-based systems, delivering zero-downtime deployments and improving deployment efficiency by up to 60%. Currently, I work at Telecom Egypt, supporting 5G Core readiness, security hardening, and large-scale cloud operations.</p>
-
-</section>
-
-<!-- ================= CERTIFICATIONS ================= -->
-<section id="certifications">
-  <h2>Certifications</h2>
-  <div class="grid">
-
-    <div class="card">
-      <h3>Certified Kubernetes Administrator (CKA)</h3>
-      <p><strong>Linux Foundation (CNCF)</strong> — Sep 2024</p>
-      <p>
-        Kubernetes cluster administration, networking, security,
-        troubleshooting, and production operations.
+<main>
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+        I am a <strong>Senior Packet Core & DevOps Engineer</strong> with <strong>10+ years of experience</strong> in telecom and 7+ years working with AWS, Kubernetes, and cloud-native Packet Core platforms. I specialize in CI/CD, Infrastructure as Code (Terraform, Helm), and scalable Linux-based systems, delivering zero-downtime deployments and improving deployment efficiency by up to 60%. Currently, I work at Telecom Egypt, supporting 5G Core readiness, security hardening, and large-scale cloud operations.
       </p>
-      <a href="https://training.linuxfoundation.org/certification/verify/" target="_blank" rel="noopener">
-        Verify Credential (ID: LF-8wlimsymfk)
-      </a>
-      &nbsp;|&nbsp;
-      <a href="cka.pdf" target="_blank">Certificate</a>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>Cloud Developer Nanodegree</h3>
-      <p><strong>Udacity</strong> — Nov 2021</p>
-      <p>
-        Cloud-native application development using AWS,
-        REST APIs, CI/CD pipelines, and serverless architectures.
+  <!-- ================= CERTIFICATIONS ================= -->
+  <section id="certifications" style="background-color: var(--white);">
+    <div class="container">
+      <h2>Certifications</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Certified Kubernetes Administrator (CKA)</h3>
+          <p><strong>Linux Foundation (CNCF)</strong> — Sep 2024</p>
+          <p>Kubernetes cluster administration, networking, security, troubleshooting, and production operations.</p>
+          <a href="https://training.linuxfoundation.org/certification/verify/" target="_blank" rel="noopener">Verify Credential</a>
+        </div>
+        <div class="card">
+          <h3>Cloud Developer Nanodegree</h3>
+          <p><strong>Udacity</strong> — Nov 2021</p>
+          <p>Cloud-native application development using AWS, REST APIs, CI/CD pipelines, and serverless architectures.</p>
+          <a href="https://confirm.udacity.com/FTZEZDYQ" target="_blank" rel="noopener">Verify Certificate</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem auto;">
+        Real-world cloud and DevOps projects focused on cost optimization, security, automation, and production reliability.
       </p>
-      <a href="https://confirm.udacity.com/FTZEZDYQ" target="_blank" rel="noopener">
-        Verify Certificate
-      </a>
-      &nbsp;|&nbsp;
-      <a href="cloud.pdf" target="_blank">Certificate</a>
+      <div class="grid">
+        <div class="project">
+          <h3>Secure Static Website with CloudFront<span class="badge cnd">CDN</span></h3>
+          <p>Deployed a secure static website using CloudFront with Origin Access Control (OAC), enforcing private S3 access and HTTPS-only delivery.</p>
+          <p><strong>Tech:</strong> AWS CloudFront, S3, IAM, Terraform</p>
+          <a href="https://github.com/philiphabib/portfolio-static-by-terraform" target="_blank">GitHub</a>
+          <a href="https://cnd.philip-portfolio.com" target="_blank">Live Site</a>
+        </div>
+        <div class="project">
+          <h3>AWS Serverless User API<span class="badge api">API</span></h3>
+          <p>Designed and deployed a scalable serverless CRUD API using AWS Lambda, API Gateway, and DynamoDB with CORS and input validation.</p>
+          <p><strong>Tech:</strong> AWS Lambda, API GW, DynamoDB</p>
+          <a href="https://github.com/philiphabib/aws-serverless-users-api" target="_blank">GitHub</a>
+        </div>
+        <div class="project">
+          <h3>CI/CD Pipeline Automation<span class="badge ci-cd">CI/CD</span></h3>
+          <p>Implemented an end-to-end CI/CD pipeline using GitHub Actions to build Docker images and deploy to Kubernetes via Helm.</p>
+          <p><strong>Tech:</strong> GitHub Actions, Docker, Helm, Kubernetes</p>
+          <a href="https://github.com/philiphabib/microservice-project" target="_blank">GitHub</a>
+        </div>
+      </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- ================= SKILLS ================= -->
+  <section id="skills" style="background-color: var(--white);">
+    <div class="container">
+      <h2>Technical Skills</h2>
+      <div class="grid">
+        <div class="card"><strong>Cloud</strong><p>AWS (EKS, EC2, ECR, IAM, VPC, S3, CloudFront)</p></div>
+        <div class="card"><strong>Containers</strong><p>Kubernetes (CKA), Docker, Helm, K3s</p></div>
+        <div class="card"><strong>CI/CD</strong><p>GitHub Actions, Bash, Python, GitOps</p></div>
+        <div class="card"><strong>IaC</strong><p>Terraform, Helm Charts</p></div>
+        <div class="card"><strong>Monitoring</strong><p>Prometheus, Grafana</p></div>
+        <div class="card"><strong>Telecom</strong><p>EPC, Signaling, Logs, CDR Analysis</p></div>
+      </div>
+    </div>
+  </section>
 
-<!-- ================= PROJECTS ================= -->
-<section id="projects">
-  <h2>Projects</h2>
-
-  <p class="section-intro">
-    Real-world cloud and DevOps projects focused on cost optimization,
-    security, automation, and production reliability.
-  </p>
-
-  <div class="grid">
-
-    <div class="project">
-      <h3>
-        Secure Static Website with CloudFront OAC
-        <span class="badge cnd">CDN</span>
-      </h3>
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:philip.habib2012@gmail.com">philip.habib2012@gmail.com</a></p>
       <p>
-        Deployed a secure static website using CloudFront with Origin Access Control (OAC),
-        enforcing private S3 access and HTTPS-only delivery.
+        <a href="https://github.com/philiphabib" target="_blank">GitHub</a> |
+        <a href="https://hub.docker.com/repositories/philiphabib" target="_blank">Docker Hub</a>
       </p>
-      <p><strong>Tech:</strong> AWS CloudFront, S3, IAM, Terraform</p>
-      <a href="https://github.com/philiphabib/portfolio-static-by-terraform" target="_blank">GitHub</a>
-      &nbsp;|&nbsp;
-      <a href="https://cnd.philip-portfolio.com" target="_blank">Live Site</a>
     </div>
-
-    <div class="project">
-      <h3>
-        AWS Serverless User API
-        <span class="badge api">API</span>
-      </h3>
-      <p>
-        Designed and deployed a scalable serverless CRUD API using AWS Lambda,
-        API GW, and DynamoDB with CORS and input validation.
-      </p>
-      <p><strong>Tech:</strong> AWS Lambda, API GW, DynamoDB</p>
-      <a href="https://github.com/philiphabib/aws-serverless-users-api" target="_blank">GitHub</a>
-      <a href="test3.html" target="_blank">Serverless API Demo</a>
-    </div>
-
-    <div class="project">
-      <h3>
-        CI/CD Pipeline Automation
-        <span class="badge ci-cd">CI/CD</span>
-      </h3>
-      <p>
-        Implemented an end-to-end CI/CD pipeline using GitHub Actions
-        to build Docker images and deploy to Kubernetes via Helm.
-      </p>
-      <p><strong>Tech:</strong> GitHub Actions, Docker, Helm, Kubernetes</p>
-      <a href="https://github.com/philiphabib/microservice-project" target="_blank">GitHub</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================= SKILLS ================= -->
-<section id="skills">
-  <h2>Technical Skills</h2>
-  <div class="grid">
-    <div class="card"><strong>Cloud</strong><p>AWS (EKS, EC2, ECR, IAM, VPC, S3, CloudFront)</p></div>
-    <div class="card"><strong>Containers</strong><p>Kubernetes (CKA), Docker, Helm, K3s</p></div>
-    <div class="card"><strong>CI/CD</strong><p>GitHub Actions, Bash, Python, GitOps</p></div>
-    <div class="card"><strong>IaC</strong><p>Terraform, Helm Charts</p></div>
-    <div class="card"><strong>Monitoring</strong><p>Prometheus, Grafana</p></div>
-    <div class="card"><strong>Telecom</strong><p>EPC, Signaling, Logs, CDR Analysis</p></div>
-  </div>
-</section>
-
-<!-- ================= CONTACT ================= -->
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:philip.habib2012@gmail.com">philip.habib2012@gmail.com</a></p>
-  <p>
-    <a href="https://github.com/philiphabib" target="_blank">GitHub</a> |
-    <a href="https://hub.docker.com/repositories/philiphabib" target="_blank">Docker Hub</a>
-  </p>
-</section>
+  </section>
+</main>
 
 <footer>
   © 2025 Philip Abdelmalak — Packet Core & DevOps Engineer (CKA)
 </footer>
+
+<script>
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Close mobile menu when a link is clicked
+  document.querySelectorAll('#nav-links li a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+  });
+
+  // Add shadow to navbar on scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Fade-in sections on scroll
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+</script>
 
 </body>
 </html>
