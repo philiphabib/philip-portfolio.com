@@ -1,0 +1,592 @@
+buntu@ip-172-31-78-16:~$ kubectl get pod -n telecom-core
+NAME                               READY   STATUS    RESTARTS   AGE
+open5gs-amf-65f4fb799b-9p2kp       1/1     Running   0          2m44s
+open5gs-ausf-5c8b58d668-k9qdk      1/1     Running   0          6m26s
+open5gs-bsf-5658fbf87c-tmrfk       1/1     Running   0          5m51s
+open5gs-mongodb-77b98b77db-22rt7   1/1     Running   0          8m20s
+open5gs-nrf-d6dd66dc7-jtgpw        1/1     Running   0          8m8s
+open5gs-nssf-5bf6f565bd-5hvr6      1/1     Running   0          5m20s
+open5gs-pcf-557f8fcd65-5mwpk       1/1     Running   0          4m44s
+open5gs-scp-964474cfc-d9xhr        1/1     Running   0          4m8s
+open5gs-sepp-698468f746-72n6b      1/1     Running   0          3m31s
+open5gs-udm-9764d798b-nszbj        1/1     Running   0          7m2s
+open5gs-udr-6bfbdbd99b-9tzwj       1/1     Running   0          7m33s
+open5gs-webui-59976bd87f-t8pb5     1/1     Running   0          2m8s
+smf-production-546489fb95-grd5m    1/1     Running   0          2m46s
+ueransim-gnb-677dc5f8b5-tttmk      1/1     Running   0          93s
+ueransim-ue-1-6796db4b6f-v7w74     1/1     Running   0          91s
+ueransim-ue-2-67546b954b-z7g4b     1/1     Running   0          89s
+ueransim-ue-3-78dd955c47-m6cnq     1/1     Running   0          87s
+upf-embb-6877f8d799-5jkmh          1/1     Running   0          2m55s
+upf-mmtc-78dc5dffff-rfn9m          1/1     Running   0          2m49s
+upf-urllc-5bd79b8c4c-x6dwr         1/1     Running   0          2m52s
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ ./5g-heal.sh 
+==============================
+🚀 5G CORE SELF-HEAL (v2)
+==============================
+deployment.apps/smf-production restarted
+Waiting for deployment "smf-production" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "smf-production" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "smf-production" rollout to finish: 1 old replicas are pending termination...
+deployment "smf-production" successfully rolled out
+deployment.apps/upf-embb restarted
+deployment.apps/upf-urllc restarted
+deployment.apps/upf-mmtc restarted
+Waiting for deployment "upf-embb" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "upf-embb" rollout to finish: 1 old replicas are pending termination...
+deployment "upf-embb" successfully rolled out
+deployment "upf-urllc" successfully rolled out
+deployment "upf-mmtc" successfully rolled out
+⏳ Waiting for UPF PFCP readiness...
+Defaulted container "upf-embb" out of: upf-embb, tun-create (init)
+Defaulted container "upf-embb" out of: upf-embb, tun-create (init)
+✅ UPF PFCP is ready
+🔄 Re-trigger SMF for PFCP association...
+deployment.apps/smf-production restarted
+Waiting for deployment spec update to be observed...
+Waiting for deployment "smf-production" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "smf-production" rollout to finish: 1 old replicas are pending termination...
+deployment "smf-production" successfully rolled out
+🔍 Checking PFCP association...
+✅ PFCP association SUCCESS
+==============================
+✅ 5G CORE HEALTHY
+==============================
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core ueransim-gnb-677dc5f8b5-tttmk 
+UERANSIM v3.2.6
+[2026-02-28 14:36:33.715] [sctp] [info] Trying to establish SCTP connection... (10.101.43.237:38412)
+[2026-02-28 14:36:33.718] [sctp] [info] SCTP connection established (10.101.43.237:38412)
+[2026-02-28 14:36:33.718] [sctp] [debug] SCTP association setup ascId[13]
+[2026-02-28 14:36:33.718] [ngap] [debug] Sending NG Setup Request
+[2026-02-28 14:36:33.741] [ngap] [debug] NG Setup Response received
+[2026-02-28 14:36:33.741] [ngap] [info] NG Setup procedure is successful
+[2026-02-28 14:36:35.776] [rrc] [debug] UE[1] new signal detected
+[2026-02-28 14:36:35.782] [rrc] [info] RRC Setup for UE[1]
+[2026-02-28 14:36:35.784] [ngap] [debug] Initial NAS message received from UE[1]
+[2026-02-28 14:36:35.958] [ngap] [debug] Initial Context Setup Request received
+[2026-02-28 14:36:37.586] [rrc] [debug] UE[2] new signal detected
+[2026-02-28 14:36:37.590] [rrc] [info] RRC Setup for UE[2]
+[2026-02-28 14:36:37.590] [ngap] [debug] Initial NAS message received from UE[2]
+[2026-02-28 14:36:37.629] [ngap] [debug] Initial Context Setup Request received
+[2026-02-28 14:36:38.845] [ngap] [info] PDU session resource(s) setup for UE[1] count[1]
+[2026-02-28 14:36:39.378] [rrc] [debug] UE[3] new signal detected
+[2026-02-28 14:36:39.380] [rrc] [info] RRC Setup for UE[3]
+[2026-02-28 14:36:39.380] [ngap] [debug] Initial NAS message received from UE[3]
+[2026-02-28 14:36:39.407] [ngap] [debug] Initial Context Setup Request received
+[2026-02-28 14:36:39.634] [ngap] [info] PDU session resource(s) setup for UE[3] count[1]
+[2026-02-28 14:36:46.368] [ngap] [error] Error indication received. Cause: protocol/semantic-error
+[2026-02-28 14:36:54.121] [ngap] [info] PDU session resource(s) setup for UE[2] count[1]
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core ueransim-ue-1-6796db4b6f-v7w74 
+UERANSIM v3.2.6
+[2026-02-28 14:36:35.776] [nas] [info] UE switches to state [MM-DEREGISTERED/PLMN-SEARCH]
+[2026-02-28 14:36:35.777] [rrc] [debug] New signal detected for cell[1], total [1] cells in coverage
+[2026-02-28 14:36:35.778] [nas] [info] Selected plmn[999/70]
+[2026-02-28 14:36:35.778] [rrc] [info] Selected cell plmn[999/70] tac[1] category[SUITABLE]
+[2026-02-28 14:36:35.778] [nas] [info] UE switches to state [MM-DEREGISTERED/PS]
+[2026-02-28 14:36:35.778] [nas] [info] UE switches to state [MM-DEREGISTERED/NORMAL-SERVICE]
+[2026-02-28 14:36:35.778] [nas] [debug] Initial registration required due to [MM-DEREG-NORMAL-SERVICE]
+[2026-02-28 14:36:35.779] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-02-28 14:36:35.779] [nas] [debug] Sending Initial Registration
+[2026-02-28 14:36:35.781] [rrc] [debug] Sending RRC Setup Request
+[2026-02-28 14:36:35.782] [nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[2026-02-28 14:36:35.783] [rrc] [info] RRC connection established
+[2026-02-28 14:36:35.783] [rrc] [info] UE switches to state [RRC-CONNECTED]
+[2026-02-28 14:36:35.783] [nas] [info] UE switches to state [CM-CONNECTED]
+[2026-02-28 14:36:35.863] [nas] [debug] Authentication Request received
+[2026-02-28 14:36:35.883] [nas] [debug] Security Mode Command received
+[2026-02-28 14:36:35.883] [nas] [debug] Selected integrity[2] ciphering[0]
+[2026-02-28 14:36:35.959] [nas] [debug] Registration accept received
+[2026-02-28 14:36:35.959] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-02-28 14:36:35.959] [nas] [debug] Sending Registration Complete
+[2026-02-28 14:36:35.959] [nas] [info] Initial Registration is successful
+[2026-02-28 14:36:35.960] [nas] [debug] Sending PDU Session Establishment Request
+[2026-02-28 14:36:35.960] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-02-28 14:36:36.200] [nas] [debug] Configuration Update Command received
+[2026-02-28 14:36:38.846] [nas] [debug] PDU Session Establishment Accept received
+[2026-02-28 14:36:38.846] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-02-28 14:36:38.915] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.45.0.2] is up.
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core ueransim-ue-2-67546b954b-z7g4b 
+UERANSIM v3.2.6
+[2026-02-28 14:36:37.585] [nas] [info] UE switches to state [MM-DEREGISTERED/PLMN-SEARCH]
+[2026-02-28 14:36:37.586] [rrc] [debug] New signal detected for cell[1], total [1] cells in coverage
+[2026-02-28 14:36:37.587] [nas] [info] Selected plmn[999/70]
+[2026-02-28 14:36:37.587] [rrc] [info] Selected cell plmn[999/70] tac[1] category[SUITABLE]
+[2026-02-28 14:36:37.588] [nas] [info] UE switches to state [MM-DEREGISTERED/PS]
+[2026-02-28 14:36:37.588] [nas] [info] UE switches to state [MM-DEREGISTERED/NORMAL-SERVICE]
+[2026-02-28 14:36:37.588] [nas] [debug] Initial registration required due to [MM-DEREG-NORMAL-SERVICE]
+[2026-02-28 14:36:37.589] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-02-28 14:36:37.589] [nas] [debug] Sending Initial Registration
+[2026-02-28 14:36:37.590] [rrc] [debug] Sending RRC Setup Request
+[2026-02-28 14:36:37.590] [nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[2026-02-28 14:36:37.590] [rrc] [info] RRC connection established
+[2026-02-28 14:36:37.590] [rrc] [info] UE switches to state [RRC-CONNECTED]
+[2026-02-28 14:36:37.590] [nas] [info] UE switches to state [CM-CONNECTED]
+[2026-02-28 14:36:37.597] [nas] [debug] Authentication Request received
+[2026-02-28 14:36:37.602] [nas] [debug] Security Mode Command received
+[2026-02-28 14:36:37.602] [nas] [debug] Selected integrity[2] ciphering[0]
+[2026-02-28 14:36:37.629] [nas] [debug] Registration accept received
+[2026-02-28 14:36:37.630] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-02-28 14:36:37.630] [nas] [debug] Sending Registration Complete
+[2026-02-28 14:36:37.630] [nas] [info] Initial Registration is successful
+[2026-02-28 14:36:37.630] [nas] [debug] Sending PDU Session Establishment Request
+[2026-02-28 14:36:37.630] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-02-28 14:36:37.837] [nas] [debug] Configuration Update Command received
+[2026-02-28 14:36:45.357] [nas] [error] PDU Session Establishment Reject received [OUT_OF_LADN_SERVICE_AREA]
+[2026-02-28 14:36:46.395] [nas] [debug] Sending PDU Session Establishment Request
+[2026-02-28 14:36:46.419] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-02-28 14:36:54.081] [nas] [error] PDU Session Establishment Reject received [OUT_OF_LADN_SERVICE_AREA]
+[2026-02-28 14:36:54.102] [nas] [debug] Sending PDU Session Establishment Request
+[2026-02-28 14:36:54.102] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-02-28 14:36:54.121] [nas] [debug] PDU Session Establishment Accept received
+[2026-02-28 14:36:54.121] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-02-28 14:36:54.144] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.46.0.4] is up.
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core ueransim-ue-3-78dd955c47-m6cnq 
+UERANSIM v3.2.6
+[2026-02-28 14:36:39.378] [nas] [info] UE switches to state [MM-DEREGISTERED/PLMN-SEARCH]
+[2026-02-28 14:36:39.379] [rrc] [debug] New signal detected for cell[1], total [1] cells in coverage
+[2026-02-28 14:36:39.379] [nas] [info] Selected plmn[999/70]
+[2026-02-28 14:36:39.379] [rrc] [info] Selected cell plmn[999/70] tac[1] category[SUITABLE]
+[2026-02-28 14:36:39.379] [nas] [info] UE switches to state [MM-DEREGISTERED/PS]
+[2026-02-28 14:36:39.379] [nas] [info] UE switches to state [MM-DEREGISTERED/NORMAL-SERVICE]
+[2026-02-28 14:36:39.379] [nas] [debug] Initial registration required due to [MM-DEREG-NORMAL-SERVICE]
+[2026-02-28 14:36:39.379] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-02-28 14:36:39.380] [nas] [debug] Sending Initial Registration
+[2026-02-28 14:36:39.380] [nas] [info] UE switches to state [MM-REGISTER-INITIATED]
+[2026-02-28 14:36:39.380] [rrc] [debug] Sending RRC Setup Request
+[2026-02-28 14:36:39.380] [rrc] [info] RRC connection established
+[2026-02-28 14:36:39.380] [rrc] [info] UE switches to state [RRC-CONNECTED]
+[2026-02-28 14:36:39.380] [nas] [info] UE switches to state [CM-CONNECTED]
+[2026-02-28 14:36:39.387] [nas] [debug] Authentication Request received
+[2026-02-28 14:36:39.392] [nas] [debug] Security Mode Command received
+[2026-02-28 14:36:39.393] [nas] [debug] Selected integrity[2] ciphering[0]
+[2026-02-28 14:36:39.407] [nas] [debug] Registration accept received
+[2026-02-28 14:36:39.407] [nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]
+[2026-02-28 14:36:39.407] [nas] [debug] Sending Registration Complete
+[2026-02-28 14:36:39.407] [nas] [info] Initial Registration is successful
+[2026-02-28 14:36:39.407] [nas] [debug] Sending PDU Session Establishment Request
+[2026-02-28 14:36:39.408] [nas] [debug] UAC access attempt is allowed for identity[0], category[MO_sig]
+[2026-02-28 14:36:39.612] [nas] [debug] Configuration Update Command received
+[2026-02-28 14:36:39.635] [nas] [debug] PDU Session Establishment Accept received
+[2026-02-28 14:36:39.635] [nas] [info] PDU Session establishment is successful PSI[1]
+[2026-02-28 14:36:39.667] [app] [info] Connection setup for PDU session[1] is successful, TUN interface[uesimtun0, 10.47.0.2] is up.
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core smf-production-64988fd8cb-qwtd8 
+Open5GS daemon v2.7.5
+
+02/28 14:38:26.920: [app] INFO: Configuration: '/opt/open5gs/etc/open5gs/smf.yaml' (../lib/app/ogs-init.c:144)
+02/28 14:38:27.134: [sbi] INFO: Setup NF EndPoint(fqdn) [open5gs-scp-sbi:7777] (../lib/sbi/context.c:507)
+02/28 14:38:27.135: [smf] WARNING: No diameter configuration (../src/smf/fd-path.c:30)
+02/28 14:38:27.137: [gtp] INFO: gtp_server() [10.244.119.219]:2123 (../lib/gtp/path.c:30)
+02/28 14:38:27.137: [gtp] INFO: gtp_server() [10.244.119.219]:2152 (../lib/gtp/path.c:30)
+02/28 14:38:27.138: [pfcp] INFO: pfcp_server() [10.244.119.219]:8805 (../lib/pfcp/path.c:30)
+02/28 14:38:27.140: [sbi] INFO: NF Service [nsmf-pdusession] (../lib/sbi/context.c:1994)
+02/28 14:38:27.140: [sbi] INFO: nghttp2_server() [http://10.244.119.219]:7777 (../lib/sbi/nghttp2-server.c:439)
+02/28 14:38:27.141: [app] INFO: SMF initialize...done (../src/smf/app.c:31)
+02/28 14:38:27.142: [smf] INFO: PFCP associated [10.106.127.117]:8805 [10.244.119.218]:8805 (../src/smf/pfcp-sm.c:188)
+02/28 14:38:27.143: [smf] INFO: PFCP associated [10.98.6.135]:8805 [10.244.119.195]:8805 (../src/smf/pfcp-sm.c:188)
+02/28 14:38:27.143: [smf] INFO: PFCP associated [10.96.143.198]:8805 [10.244.119.242]:8805 (../src/smf/pfcp-sm.c:188)
+02/28 14:38:27.148: [sbi] INFO: [249d4e08-14b3-41f1-a0eb-816125e7bcad] NF registered [Heartbeat:10s] (../lib/sbi/nf-sm.c:295)
+02/28 14:38:27.151: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.223:7777] (../lib/sbi/nnrf-handler.c:955)
+02/28 14:38:27.151: [sbi] INFO: [24a216e0-14b3-41f1-941f-d35b3e6cea6d] Subscription created until 2026-03-01T14:38:27.150039+00:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:874)
+02/28 14:38:27.151: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.223:7777] (../lib/sbi/nnrf-handler.c:955)
+02/28 14:38:27.151: [sbi] INFO: [24a21b86-14b3-41f1-941f-d35b3e6cea6d] Subscription created until 2026-03-01T14:38:27.150137+00:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:874)
+02/28 14:38:27.153: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.223:7777] (../lib/sbi/nnrf-handler.c:955)
+02/28 14:38:27.153: [sbi] INFO: [24a22054-14b3-41f1-941f-d35b3e6cea6d] Subscription created until 2026-03-01T14:38:27.150261+00:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:874)
+02/28 14:38:27.153: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.223:7777] (../lib/sbi/nnrf-handler.c:955)
+02/28 14:38:27.153: [sbi] INFO: [24a2331e-14b3-41f1-941f-d35b3e6cea6d] Subscription created until 2026-03-01T14:38:27.150754+00:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:874)
+02/28 14:38:27.153: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.223:7777] (../lib/sbi/nnrf-handler.c:955)
+02/28 14:38:27.153: [sbi] INFO: [24a2417e-14b3-41f1-941f-d35b3e6cea6d] Subscription created until 2026-03-01T14:38:27.151120+00:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:874)
+02/28 14:38:27.175: [sbi] INFO: [1cd1c164-14b2-41f1-a6a9-91f94c8c6e53] (NRF-profile-get) NF registered (../lib/sbi/nf-sm.c:81)
+02/28 14:38:27.175: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.197:80] (../lib/sbi/context.c:2374)
+02/28 14:38:27.175: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.197:7777] (../lib/sbi/context.c:2113)
+02/28 14:38:27.175: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.197:7777] (../lib/sbi/context.c:2113)
+02/28 14:38:27.175: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.197:7777] (../lib/sbi/context.c:2113)
+02/28 14:38:27.178: [sbi] INFO: [6ee0c90a-14b2-41f1-839e-ed8787227d8e] (NRF-profile-get) NF registered (../lib/sbi/nf-sm.c:81)
+02/28 14:38:27.178: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.252:80] (../lib/sbi/context.c:2374)
+02/28 14:38:27.178: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.252:7777] (../lib/sbi/context.c:2113)
+02/28 14:38:27.178: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.252:7777] (../lib/sbi/context.c:2113)
+02/28 14:38:27.178: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.252:7777] (../lib/sbi/context.c:2113)
+02/28 14:38:27.178: [sbi] INFO: [9a72c820-14b2-41f1-852f-070fef21e7e6] (NRF-profile-get) NF registered (../lib/sbi/nf-sm.c:81)
+02/28 14:38:27.179: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.249:7777] (../lib/sbi/context.c:2374)
+02/28 14:38:27.179: [sbi] INFO: [b67885dc-14b2-41f1-af39-f1b7c5d1fa74] (NRF-profile-get) NF registered (../lib/sbi/nf-sm.c:81)
+02/28 14:38:27.179: [sbi] INFO: Setup NF EndPoint(addr) [172.31.78.16:80] (../lib/sbi/context.c:2374)
+02/28 14:38:27.179: [sbi] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../lib/sbi/context.c:2113)
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core open5gs-amf-65f4fb799b-9p2kp | grep imsi
+02/28 14:36:36.194: [gmm] INFO: [imsi-999700000000001] Registration complete (../src/amf/gmm-sm.c:2658)
+02/28 14:36:36.194: [amf] INFO: [imsi-999700000000001] Configuration update command (../src/amf/nas-path.c:607)
+02/28 14:36:36.200: [gmm] INFO: UE SUPI[imsi-999700000000001] DNN[internet] S_NSSAI[SST:1 SD:0x111111] smContextRef[NULL] smContextResourceURI[NULL] (../src/amf/gmm-handler.c:1374)
+02/28 14:36:37.835: [gmm] INFO: [imsi-999700000000002] Registration complete (../src/amf/gmm-sm.c:2658)
+02/28 14:36:37.835: [amf] INFO: [imsi-999700000000002] Configuration update command (../src/amf/nas-path.c:607)
+02/28 14:36:37.835: [gmm] INFO: UE SUPI[imsi-999700000000002] DNN[lowlat] S_NSSAI[SST:2 SD:0x222222] smContextRef[NULL] smContextResourceURI[NULL] (../src/amf/gmm-handler.c:1374)
+02/28 14:36:39.611: [gmm] INFO: [imsi-999700000000003] Registration complete (../src/amf/gmm-sm.c:2658)
+02/28 14:36:39.611: [amf] INFO: [imsi-999700000000003] Configuration update command (../src/amf/nas-path.c:607)
+02/28 14:36:39.611: [gmm] INFO: UE SUPI[imsi-999700000000003] DNN[iot] S_NSSAI[SST:3 SD:0x333333] smContextRef[NULL] smContextResourceURI[NULL] (../src/amf/gmm-handler.c:1374)
+02/28 14:36:42.167: [amf] INFO: [imsi-999700000000003:1:11][0:0:NULL] /nsmf-pdusession/v1/sm-contexts/{smContextRef}/modify (../src/amf/nsmf-handler.c:942)        
+02/28 14:36:46.423: [gmm] INFO: UE SUPI[imsi-999700000000002] DNN[lowlat] S_NSSAI[SST:2 SD:0x222222] smContextRef[NULL] smContextResourceURI[NULL] (../src/amf/gmm-handler.c:1374)
+02/28 14:36:54.103: [gmm] INFO: UE SUPI[imsi-999700000000002] DNN[lowlat] S_NSSAI[SST:2 SD:0x222222] smContextRef[NULL] smContextResourceURI[NULL] (../src/amf/gmm-handler.c:1374)
+02/28 14:36:59.137: [amf] INFO: [imsi-999700000000002:1:11][0:0:NULL] /nsmf-pdusession/v1/sm-contexts/{smContextRef}/modify (../src/amf/nsmf-handler.c:942)        
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core upf-embb-559b648c48-zlz9s 
+Defaulted container "upf-embb" out of: upf-embb, tun-create (init)
+Open5GS daemon v2.7.5
+
+02/28 14:38:22.573: [app] INFO: Configuration: '/opt/open5gs/etc/open5gs/upf.yaml' (../lib/app/ogs-init.c:144)
+02/28 14:38:22.840: [pfcp] INFO: pfcp_server() [10.244.119.195]:8805 (../lib/pfcp/path.c:30)
+02/28 14:38:22.840: [gtp] INFO: gtp_server() [10.244.119.195]:2152 (../lib/gtp/path.c:30)
+02/28 14:38:22.840: [app] INFO: UPF initialize...done (../src/upf/app.c:31)
+02/28 14:38:26.784: [upf] ERROR: Cannot find PFCP-Node: type [1] node_id NULL from [10.244.119.247]:8805 (../src/upf/pfcp-path.c:146)
+02/28 14:38:27.140: [upf] INFO: PFCP associated [10.244.119.219]:8805 (../src/upf/pfcp-sm.c:168)
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core upf-mmtc-848f48cccb-bmhdb 
+Defaulted container "upf-mmtc" out of: upf-mmtc, tun-create (init)
+Open5GS daemon v2.7.5
+
+02/28 14:38:22.581: [app] INFO: Configuration: '/opt/open5gs/etc/open5gs/upf.yaml' (../lib/app/ogs-init.c:144)
+02/28 14:38:22.782: [pfcp] INFO: pfcp_server() [10.244.119.242]:8805 (../lib/pfcp/path.c:30)
+02/28 14:38:22.782: [gtp] INFO: gtp_server() [10.244.119.242]:2152 (../lib/gtp/path.c:30)
+02/28 14:38:22.783: [app] INFO: UPF initialize...done (../src/upf/app.c:31)
+02/28 14:38:26.868: [upf] ERROR: Cannot find PFCP-Node: type [1] node_id NULL from [10.244.119.247]:8805 (../src/upf/pfcp-path.c:146)
+02/28 14:38:27.140: [upf] INFO: PFCP associated [10.244.119.219]:8805 (../src/upf/pfcp-sm.c:168)
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ k logs -n telecom-core upf-urllc-c99b74c9d-ngx9j 
+Defaulted container "upf-urllc" out of: upf-urllc, tun-create (init)
+Open5GS daemon v2.7.5
+
+02/28 14:38:22.573: [app] INFO: Configuration: '/opt/open5gs/etc/open5gs/upf.yaml' (../lib/app/ogs-init.c:144)
+02/28 14:38:22.830: [pfcp] INFO: pfcp_server() [10.244.119.218]:8805 (../lib/pfcp/path.c:30)
+02/28 14:38:22.831: [gtp] INFO: gtp_server() [10.244.119.218]:2152 (../lib/gtp/path.c:30)
+02/28 14:38:22.831: [app] INFO: UPF initialize...done (../src/upf/app.c:31)
+02/28 14:38:26.878: [upf] ERROR: Cannot find PFCP-Node: type [1] node_id NULL from [10.244.119.247]:8805 (../src/upf/pfcp-path.c:146)
+02/28 14:38:27.139: [upf] INFO: PFCP associated [10.244.119.219]:8805 (../src/upf/pfcp-sm.c:168)
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ amf | grep SUPI
+02/28 14:36:39.611: [gmm] INFO: UE SUPI[imsi-999700000000003] DNN[iot] S_NSSAI[SST:3 SD:0x333333] smContextRef[NULL] smContextResourceURI[NULL] (../src/amf/gmm-handler.c:1374)
+02/28 14:36:46.423: [gmm] INFO: UE SUPI[imsi-999700000000002] DNN[lowlat] S_NSSAI[SST:2 SD:0x222222] smContextRef[NULL] smContextResourceURI[NULL] (../src/amf/gmm-handler.c:1374)
+02/28 14:36:54.103: [gmm] INFO: UE SUPI[imsi-999700000000002] DNN[lowlat] S_NSSAI[SST:2 SD:0x222222] smContextRef[NULL] smContextResourceURI[NULL] (../src/amf/gmm-handler.c:1374)
+
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ nrf | grep Setup
+02/28 14:35:20.658: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.229:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:35:22.336: [sbi] INFO: Setup NF EndPoint(addr) [172.31.78.16:80] (../lib/sbi/context.c:2374)
+02/28 14:35:22.336: [sbi] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../lib/sbi/context.c:2113)
+02/28 14:35:22.343: [nrf] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:35:22.345: [nrf] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:35:22.346: [nrf] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:35:22.346: [nrf] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:35:22.346: [nrf] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:35:22.347: [nrf] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:35:22.347: [nrf] INFO: Setup NF EndPoint(addr) [172.31.78.16:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:13.261: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.247:80] (../lib/sbi/context.c:2374)
+02/28 14:38:13.261: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.247:7777] (../lib/sbi/context.c:2113)
+02/28 14:38:13.265: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.247:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:13.266: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.247:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:13.266: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.247:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:13.267: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.247:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:13.267: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.247:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:27.146: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.219:80] (../lib/sbi/context.c:2374)
+02/28 14:38:27.146: [sbi] INFO: Setup NF EndPoint(addr) [10.244.119.219:7777] (../lib/sbi/context.c:2113)
+02/28 14:38:27.150: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.219:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:27.150: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.219:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:27.150: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.219:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:27.150: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.219:7777] (../src/nrf/nnrf-handler.c:569)
+02/28 14:38:27.151: [nrf] INFO: Setup NF EndPoint(addr) [10.244.119.219:7777] (../src/nrf/nnrf-handler.c:569)
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$ 
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$
+ubuntu@ip-172-31-78-16:~$ ./5g-ops.sh list-users
+Defaulted container "mongodb" out of: mongodb, log-dir (init)
+[
+  {
+    imsi: '999700000000001',
+    slice: [
+      {
+        _id: ObjectId('69947727c3e636b67479fba5'),
+        sst: 1,
+        default_indicator: true,
+        session: [
+          {
+            qos: {
+              arp: {
+                priority_level: 8,
+                pre_emption_capability: 1,
+                pre_emption_vulnerability: 1
+              },
+              index: 9
+            },
+            ambr: {
+              downlink: { value: 1, unit: 3 },
+              uplink: { value: 1, unit: 3 }
+            },
+            _id: ObjectId('69947727c3e6361edf79fba6'),
+            name: 'internet',
+            type: 3,
+            pcc_rule: []
+          }
+        ],
+        sd: '111111'
+      }
+    ]
+  },
+  {
+    imsi: '999700000000002',
+    slice: [
+      {
+        _id: ObjectId('69947a7b4fc9fb0ff8a26e6e'),
+        sst: 2,
+        default_indicator: true,
+        session: [
+          {
+            qos: {
+              arp: {
+                priority_level: 8,
+                pre_emption_capability: 1,
+                pre_emption_vulnerability: 1
+              },
+              index: 9
+            },
+            ambr: {
+              downlink: { value: 1, unit: 3 },
+              uplink: { value: 1, unit: 3 }
+            },
+            _id: ObjectId('69947a7b4fc9fb4e60a26e6f'),
+            name: 'lowlat',
+            type: 3,
+            pcc_rule: []
+          }
+        ],
+        sd: '222222'
+      }
+    ]
+  },
+  {
+    imsi: '999700000000003',
+    slice: [
+      {
+        _id: ObjectId('69947b744fc9fb3328a26e73'),
+        sst: 3,
+        default_indicator: true,
+        session: [
+          {
+            qos: {
+              arp: {
+                priority_level: 8,
+                pre_emption_capability: 1,
+                pre_emption_vulnerability: 1
+              },
+              index: 9
+            },
+            ambr: {
+              downlink: { value: 1, unit: 3 },
+              uplink: { value: 1, unit: 3 }
+            },
+            _id: ObjectId('69947b744fc9fbaf98a26e74'),
+            name: 'iot',
+            type: 3,
+            pcc_rule: []
+          }
+        ],
+        sd: '333333'
+      }
+    ]
+  },
+  {
+    imsi: '999700000000004',
+    slice: [
+      {
+        sst: 1,
+        sd: '111111',
+        default_indicator: true,
+        session: [
+          {
+            name: 'internet',
+            type: 3,
+            ambr: {
+              downlink: { value: 1, unit: 3 },
+              uplink: { value: 1, unit: 3 }
+            },
+            qos: {
+              index: 9,
+              arp: {
+                priority_level: 8,
+                pre_emption_capability: 1,
+                pre_emption_vulnerability: 1
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    imsi: '999700000000005',
+    slice: [
+      {
+        sst: 2,
+        sd: '222222',
+        default_indicator: true,
+        session: [
+          {
+            name: 'lowlat',
+            type: 3,
+            ambr: {
+              downlink: { value: 1, unit: 3 },
+              uplink: { value: 1, unit: 3 }
+            },
+            qos: {
+              index: 7,
+              arp: {
+                priority_level: 1,
+                pre_emption_capability: 1,
+                pre_emption_vulnerability: 1
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    imsi: '999700000000006',
+    slice: [
+      {
+        sst: 3,
+        sd: '333333',
+        default_indicator: true,
+        session: [
+          {
+            name: 'iot',
+            type: 3,
+            ambr: {
+              downlink: { value: 1, unit: 3 },
+              uplink: { value: 1, unit: 3 }
+            },
+            qos: {
+              index: 9,
+              arp: {
+                priority_level: 8,
+                pre_emption_capability: 1,
+                pre_emption_vulnerability: 1
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    imsi: '999700000000007',
+    slice: [
+      {
+        sst: 3,
+        sd: '333333',
+        default_indicator: true,
+        session: [
+          {
+            name: 'iot',
+            type: 3,
+            ambr: {
+              downlink: { value: 1, unit: 3 },
+              uplink: { value: 1, unit: 3 }
+            },
+            qos: {
+              index: 9,
+              arp: {
+                priority_level: 8,
+                pre_emption_capability: 1,
+                pre_emption_vulnerability: 1
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    imsi: '999700000000008',
+    slice: [
+      {
+        sst: 3,
+        sd: '333333',
+        default_indicator: true,
+        session: [
+          {
+            name: 'iot',
+            type: 3,
+            ambr: {
+              downlink: { value: 1, unit: 3 },
+              uplink: { value: 1, unit: 3 }
+            },
+            qos: {
+              index: 9,
+              arp: {
+                priority_level: 8,
+                pre_emption_capability: 1,
+                pre_emption_vulnerability: 1
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
+ubuntu@ip-172-31-78-16:~$
