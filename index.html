@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
     /* ================= GLOBAL STYLES & VARIABLES ================= */
     :root {
@@ -56,7 +56,7 @@
       color: var(--heading-color);
       font-weight: 600;
     }
-    
+
     h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
     h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 1.5rem; text-align: center; }
     h3 { font-size: 1.2rem; }
@@ -130,10 +130,10 @@
       color: var(--white);
     }
 
-    .hero .subtitle { font-size: 1.25rem; margin-bottom: 20px; font-weight: 400; opacity: 0.9; }
-    .hero .hero-desc { font-size: 1.1rem; max-width: 650px; margin: 0 auto 30px auto; opacity: 0.95; }
+    .hero h1 { color: var(--white); }
+    .hero p { font-size: 1.25rem; margin-bottom: 20px; font-weight: 400; opacity: 0.9; }
 
-    .hero-links .btn {
+    .hero .btn {
       display: inline-block;
       padding: 12px 28px;
       border-radius: 8px;
@@ -143,9 +143,7 @@
       color: var(--white);
       font-size: 1rem;
     }
-    .hero-links .btn a { color: var(--white); text-decoration: none; }
-    .hero-links .btn:hover { transform: translateY(-3px); background-color: #e65c5c; }
-    .hero-links .btn a:hover { text-decoration: none; }
+     .hero .btn:hover { transform: translateY(-3px); background-color: #e65c5c; text-decoration:none; }
 
 
     /* ================= SECTIONS & CARDS ================= */
@@ -161,10 +159,10 @@
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
-    
+
     #certifications .card p:first-of-type { font-weight: 500; margin-bottom: 0.5rem; }
     #certifications .card a { font-weight: 500; }
-    
+
     #skills .card { text-align: center; }
     #skills .card strong { display: block; margin-bottom: 0.5rem; color: var(--primary-color); font-size: 1.1rem; }
 
@@ -184,6 +182,7 @@
       vertical-align: middle;
       text-transform: uppercase;
     }
+    .badge.g5   { background-color: #28a745; }
     .badge.cnd   { background-color: #ff6b6b; }
     .badge.api   { background-color: #4dabf7; }
     .badge.ci-cd { background-color: #f4c724; color: var(--heading-color); }
@@ -242,26 +241,26 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero">
-  <div class="container">
-    <h1>Packet and Cloud Core Engineer</h1>
-    <p class="subtitle">CKA Certified • AWS • Kubernetes • CI/CD • Terraform • Cloud-Native Platforms</p>
-    <p class="hero-desc">Building, automating, and operating scalable cloud-native and telecom platforms with real-world production experience.</p>
-    <div class="hero-links">
-      <p class="btn primary"><a href="https://dashboard.philip-portfolio.com/" target="_blank" rel="noopener">View 5G Testbed_Core Dashboard ( Webui is under development )</a></p>
-    </div>
-  </div>
+  <h1>Packet & Cloud Core Engineer</h1>
+  <p>5G Core • AWS • Kubernetes • CI/CD • Terraform</p>
+  <a href="#projects" class="btn">View 5G Core Project</a>
 </header>
 
 <main>
   <!-- ================= ABOUT ================= -->
   <section id="about">
     <div class="container">
-      <h2>About Me</h2>
-      <p style="text-align: center; max-width: 800px; margin: 0 auto;">
-        I am a <strong>Senior Packet and Cloud Core Engineer</strong> with <strong>10+ years of experience</strong> in telecom and 7+ years working with AWS, Kubernetes, and cloud-native Packet Core platforms. I specialize in CI/CD, Infrastructure as Code (Terraform, Helm), and scalable Linux-based systems, delivering zero-downtime deployments and improving deployment efficiency by up to 60%. Currently, I work at Telecom Egypt, supporting 5G Core readiness, security hardening, and large-scale cloud operations.
-      </p>
+        <h2 style="text-align: center;">About Me</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+            Senior Packet and Cloud Core Engineer with 10+ years of telecom experience.
+            Hands-on expertise in deploying 5G Core (Open5GS) with Network Slicing on AWS,
+            including NGAP, PFCP, and GTP-U signaling validation.
+            <br><br>
+            Strong background in Kubernetes (CKA), AWS, CI/CD, and Infrastructure as Code,
+            delivering scalable and automated cloud-native telecom solutions.
+        </p>
     </div>
-  </section>
+</section>
 
   <!-- ================= CERTIFICATIONS ================= -->
   <section id="certifications" style="background-color: var(--white);">
@@ -293,6 +292,14 @@
         Real-world cloud and DevOps projects focused on cost optimization, security, automation, and production reliability.
       </p>
       <div class="grid">
+        <div class="project">
+            <h3>Cloud-Native 5G Core with Network Slicing <span class="badge g5">5G</span></h3>
+            <p>
+              Designed and deployed Open5GS 5G Core on AWS EC2 with full end-to-end connectivity using UERANSIM, Implemented multi-slice (S-NSSAI), Validated "NGAP, PFCP, GTP-U signaling, and GTP tunnel (uesimtun0)"</p>
+            <p><strong>Tech:</strong> Open5GS, UERANSIM, AWS EC2, Linux</p>
+            <a href="architecture.png">Architecture</a> |
+            <a href="5G_Core_Testbed.txt">Logs</a>
+        </div>
         <div class="project">
           <h3>Secure Static Website with CloudFront<span class="badge cnd">CDN</span></h3>
           <p>Deployed a secure static website using CloudFront with Origin Access Control (OAC), enforcing private S3 access and HTTPS-only delivery.</p>
